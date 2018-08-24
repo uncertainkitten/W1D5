@@ -34,15 +34,17 @@ class KnightPathFinder
   end
 
   def find_path(end_pos)
-    @root_node.bfs(end_pos)
+    @root_node.bfs(end_pos).trace_path_back
   end
+end
 
+class PolyTreeNode
   def trace_path_back
-    path = []
-    
+    return [self.value] if @parent == nil
+    @parent.trace_path_back + [self.value]
   end
 end
 
 test_one = KnightPathFinder.new([0,0])
 test_one.build_move_tree
-puts test_one.find_path([7,7]).inspect
+p test_one.find_path([7,7])
