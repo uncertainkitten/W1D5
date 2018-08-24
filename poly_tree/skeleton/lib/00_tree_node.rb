@@ -44,4 +44,8 @@ class PolyTreeNode
     end
     nil
   end
+
+  def inspect
+    puts "#{parent.inspect}, #{value}"
+  end
 end
