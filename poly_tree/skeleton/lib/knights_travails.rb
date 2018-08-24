@@ -9,10 +9,19 @@ class KnightPathFinder
   end
 
   def build_move_tree
+    queue = [@root_node]
+    until queue.empty?
+      current_node = queue.shift
+      self.new_move_positions(current_node.value).each do |move|
+        new_node = PolyTreeNode.new(move)
+        current_node.add_child(new_node)
+        queue << new_node
+      end
+    end
   end
 
-  def new_move_positions
-    x,y = @root_node.value
+  def new_move_positions(pos)
+    x,y = pos
     possible_moves = [[x+2,y+1],[x+2,y-1],[x-2,y+1],[x-2,y-1],[x+1,y-2],[x+1,y+2],[x-1,y-2],[x-1,y+2]]
     filtered_moves = possible_moves.select {|move| KnightPathFinder.valid_moves(move)}
     filtered_moves.reject! { |f_move| @visited_positions.include?(f_move) }
