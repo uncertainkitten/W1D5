@@ -34,8 +34,15 @@ class KnightPathFinder
   end
 
   def find_path(end_pos)
+    @root_node.bfs(end_pos)
   end
 
   def trace_path_back
+    path = []
+    
   end
 end
+
+test_one = KnightPathFinder.new([0,0])
+test_one.build_move_tree
+puts test_one.find_path([7,7]).inspect
