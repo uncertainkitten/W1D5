@@ -34,4 +34,14 @@ class PolyTreeNode
     return output
     end
   end
+
+  def bfs(target_value)
+    nodes = [self]
+    until nodes.empty?
+      current_node = nodes.pop
+      return current_node if current_node.value == target_value
+      current_node.children.each { |child| nodes.unshift(child)}
+    end
+    nil
+  end
 end
